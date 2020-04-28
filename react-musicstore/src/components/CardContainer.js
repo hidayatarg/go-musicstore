@@ -7,25 +7,18 @@ export default class CardContainer extends Component {
         super(props);
         //initialize the state object for this component
         this.state = {
-            cards: [
-                {
-                    "id": 1,
-                    "img": "img/strings.png",
-                    "imgalt": "string",
-                    "desc": "A very authentic and beautiful instrument!!",
-                    "price": 100.0,
-                    "productname": "Strings"
-                }, 
-                {
-                    "id": 2,
-                    "img": "img/redguitar.jpeg",
-                    "imgalt": "redg",
-                    "desc": "A really cool red guitar that can produce super cool music!!",
-                    "price": 299.0,
-                    "productname": "Red Guitar"
-                }
-            ]
+            cards: []
         };
+    }
+
+    componentDidMount() {
+        fetch('cards.json')
+            .then(res => res.json())
+            .then((result) => {
+                this.setState({
+                    cards: result
+                });
+            });
     }
 
     render() {
@@ -34,8 +27,11 @@ export default class CardContainer extends Component {
             card => <Card key={card.id} {...card} />
         );
         return (
-            <div>
-                {cardItems}
+            <div className='container pt-14'>
+                <h3 className='text-center text-primary'>Products</h3>
+                <div className="pt-4 row">
+                    {cardItems}
+                </div>
             </div>
         );
     }
