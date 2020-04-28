@@ -22,7 +22,7 @@ export default class CardContainer extends Component {
         ];
         //get a list of JSX elements representing each card
         const cardItems = cards.map(
-            card => <Card key={card.id} img={card.img} alt={card.imgalt} productName={card.productname} price={card.price} desc={card.desc} />
+            card => <Card key={card.id} {...card} />
         );
         return (
             <div>
